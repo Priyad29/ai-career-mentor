@@ -142,7 +142,7 @@ career-compass-ai/
 ├── style.css
 ├── app.js
 │
-├── screenshots/
+├── images/
 │   └── dashboard.png
 │
 └── README.md
