@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass AI | Personal Career Mentor</title>
+  <!-- Google Fonts: Outfit (headings) & Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       CONVERSATIONAL ONBOARDING WIZARD
+       ========================================== -->
+  <div id="onboarding-screen" class="onboarding-overlay active">
+    <div class="onboarding-card glass-panel">
+      
+      <!-- Wizard Progress Indicators -->
+      <div class="wizard-steps-header">
+        <span class="step-indicator active" data-step="1"></span>
+        <span class="step-indicator" data-step="2"></span>
+        <span class="step-indicator" data-step="3"></span>
+        <span class="step-indicator" data-step="4"></span>
+        <span class="step-indicator" data-step="5"></span>
+      </div>
+
+      <!-- Step 1: Greeting -->
+      <div class="wizard-step active" id="onboarding-step-1">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 0-10 10c0 5.25 4.25 9.5 9.5 9.5a1.5 1.5 0 0 0 1.5-1.5v-1.62c0-.83.67-1.5 1.5-1.5h1.62a1.5 1.5 0 0 0 1.5-1.5V12A10 10 0 0 0 12 2z"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <h2>Hi! I'm your AI Career Mentor.</h2>
+        <p class="step-desc">Let's build your future. First, what is your name?</p>
+        
+        <div class="form-group" style="margin-bottom: 2rem;">
+          <input type="text" id="input-onboarding-name" placeholder="Enter your name" required style="width: 100%; text-align: center; font-size: 1.1rem; padding: 0.85rem; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); color: #fff; outline: none;">
+        </div>
+
+        <button class="btn btn-primary" id="btn-start-onboarding" disabled>Let's Get Started</button>
+      </div>
+
+      <!-- Step 2: Target Career -->
+      <div class="wizard-step" id="onboarding-step-2">
+        <h2>What career are you targeting?</h2>
+        <p class="step-desc">Select your target field. We'll tailor your roadmap and interview preparation accordingly.</p>
+        
+        <div class="selection-grid scrollable-grid">
+          <button class="selection-chip career-chip" data-value="Machine Learning Engineer">
+            <span class="chip-title">Machine Learning Engineer</span>
+            <span class="chip-sub">Build models & DL systems</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="AI Engineer">
+            <span class="chip-title">AI Engineer</span>
+            <span class="chip-sub">LLMs, RAG, & Agents</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Data Scientist">
+            <span class="chip-title">Data Scientist</span>
+            <span class="chip-sub">Statistical models & analysis</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Data Analyst">
+            <span class="chip-title">Data Analyst</span>
+            <span class="chip-sub">Visualize data & SQL queries</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Software Engineer">
+            <span class="chip-title">Software Engineer</span>
+            <span class="chip-sub">Core systems & backend APIs</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Web Developer">
+            <span class="chip-title">Web Developer</span>
+            <span class="chip-sub">Frontend/Fullstack apps</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Product Manager">
+            <span class="chip-title">Product Manager</span>
+            <span class="chip-sub">Define strategy & user flow</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Cybersecurity Analyst">
+            <span class="chip-title">Cybersecurity Analyst</span>
+            <span class="chip-sub">Secure systems & defend network</span>
+          </button>
+          <button class="selection-chip career-chip" data-value="Other">
+            <span class="chip-title">Other tech role</span>
+            <span class="chip-sub">Custom track creation</span>
+          </button>
+        </div>
+        
+        <div class="wizard-nav-row">
+          <button class="btn btn-secondary btn-prev-step" data-current="2">Back</button>
+          <button class="btn btn-primary btn-next-step" data-current="2" id="btn-next-career" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Skill Level -->
+      <div class="wizard-step" id="onboarding-step-3">
+        <h2>What is your current skill level?</h2>
+        <p class="step-desc">This shapes the depth of your foundations, project difficulty, and core timeline.</p>
+        
+        <div class="selection-grid vertical">
+          <button class="selection-chip level-chip" data-value="Beginner">
+            <span class="chip-title">Beginner</span>
+            <span class="chip-sub">New to this path. Ready to learn foundations.</span>
+          </button>
+          <button class="selection-chip level-chip" data-value="Intermediate">
+            <span class="chip-title">Intermediate</span>
+            <span class="chip-sub">Know the syntax. Ready to build portfolio projects.</span>
+          </button>
+          <button class="selection-chip level-chip" data-value="Advanced">
+            <span class="chip-title">Advanced</span>
+            <span class="chip-sub">Ready to optimize, review system designs, & mock interview.</span>
+          </button>
+        </div>
+
+        <div class="wizard-nav-row">
+          <button class="btn btn-secondary btn-prev-step" data-current="3">Back</button>
+          <button class="btn btn-primary btn-next-step" data-current="3" id="btn-next-level" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Weekly Hours -->
+      <div class="wizard-step" id="onboarding-step-4">
+        <h2>How many hours can you study weekly?</h2>
+        <p class="step-desc">We will size your daily planner tasks to match this commitment level.</p>
+        
+        <div class="selection-grid scrollable-grid">
+          <button class="selection-chip hours-chip" data-value="1-5">
+            <span class="chip-title">1–5 hours</span>
+            <span class="chip-sub">~30m - 1h daily</span>
+          </button>
+          <button class="selection-chip hours-chip" data-value="5-10">
+            <span class="chip-title">5–10 hours</span>
+            <span class="chip-sub">~1h - 1.5h daily</span>
+          </button>
+          <button class="selection-chip hours-chip" data-value="10-15">
+            <span class="chip-title">10–15 hours</span>
+            <span class="chip-sub">~1.5h - 2h daily</span>
+          </button>
+          <button class="selection-chip hours-chip" data-value="15-20">
+            <span class="chip-title">15–20 hours</span>
+            <span class="chip-sub">~2h - 3h daily</span>
+          </button>
+          <button class="selection-chip hours-chip" data-value="20+">
+            <span class="chip-title">20+ hours</span>
+            <span class="chip-sub">Deep immersion daily</span>
+          </button>
+        </div>
+
+        <div class="wizard-nav-row">
+          <button class="btn btn-secondary btn-prev-step" data-current="4">Back</button>
+          <button class="btn btn-primary btn-next-step" data-current="4" id="btn-next-hours" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Learning Style -->
+      <div class="wizard-step" id="onboarding-step-5">
+        <h2>How do you learn best?</h2>
+        <p class="step-desc">We'll prioritize recommendations matching your preferred material styles.</p>
+        
+        <div class="selection-grid scrollable-grid">
+          <button class="selection-chip style-chip" data-value="Video Courses">
+            <span class="chip-title">Video Courses</span>
+            <span class="chip-sub">Visual walk-throughs & bootcamps</span>
+          </button>
+          <button class="selection-chip style-chip" data-value="Reading">
+            <span class="chip-title">Reading</span>
+            <span class="chip-sub">Documentation, blogs, & books</span>
+          </button>
+          <button class="selection-chip style-chip" data-value="Projects">
+            <span class="chip-title">Projects</span>
+            <span class="chip-sub">Building, debugging, & shipping</span>
+          </button>
+          <button class="selection-chip style-chip" data-value="Interactive Learning">
+            <span class="chip-title">Interactive Learning</span>
+            <span class="chip-sub">LeetCode coding exercises</span>
+          </button>
+          <button class="selection-chip style-chip" data-value="Mixed">
+            <span class="chip-title">Mixed Mode</span>
+            <span class="chip-sub">Balanced combinations</span>
+          </button>
+        </div>
+
+        <div class="wizard-nav-row">
+          <button class="btn btn-secondary btn-prev-step" data-current="5">Back</button>
+          <button class="btn btn-primary" id="btn-finish-onboarding" disabled>Generate My Dashboard</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MAIN APP LAYOUT
+       ========================================== -->
+  <div class="app-container" id="app-layout">
+    
+    <!-- Collapsible Responsive Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="logo-text">
+          <h1>Compass.AI</h1>
+          <span>AI Career Mentor</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-tab="roadmap">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><line x1="12" y1="6" x2="12" y2="18"/><path d="M18 6a6 6 0 0 1-6 6H6"/></svg>
+          Roadmap
+        </button>
+        <button class="nav-item" data-tab="study-planner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Study Planner
+        </button>
+        <button class="nav-item" data-tab="resume-review">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Resume Review
+        </button>
+        <button class="nav-item" data-tab="interview-prep">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Interview Prep
+        </button>
+        <button class="nav-item" data-tab="progress-tracker">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          Progress Tracker
+        </button>
+        <button class="nav-item" data-tab="accountability-coach">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Accountability
+        </button>
+        <button class="nav-item" data-tab="resources">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Resources
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="avatar-letter" id="avatar-letter">PM</div>
+          <div class="user-badge-info">
+            <span class="user-badge-role" id="user-badge-role">ML Student</span>
+            <span class="user-badge-level" id="user-badge-level">Beginner</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main class="main-content">
+      
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="top-bar-welcome">
+          <h2 id="top-bar-greeting">Welcome, Protégé</h2>
+          <p id="top-bar-date" class="subtitle">Saturday, June 20, 2026</p>
+        </div>
+        <div class="top-bar-controls">
+          <div class="status-pill green">
+            <span class="indicator"></span> Active Roadmap
+          </div>
+          <button id="btn-re-onboard" class="btn btn-secondary btn-sm">Reset Profile</button>
+        </div>
+      </header>
+
+      <!-- ==========================================
+           TAB VIEW 1: DASHBOARD
+           ========================================== -->
+      <div id="view-dashboard" class="view-tab active">
+        
+        <!-- Welcome Hero Card -->
+        <div class="dashboard-hero glass-panel">
+          <div class="hero-content">
+            <span class="hero-label">CURRENT TARGET GOAL</span>
+            <h2 id="dash-goal-title">Machine Learning Engineer</h2>
+            <div class="hero-stats-row">
+              <div class="hero-stat-box">
+                <span class="label">STAGE</span>
+                <span id="dash-stage">Foundations</span>
+              </div>
+              <div class="hero-stat-box">
+                <span class="label">STUDY TARGET</span>
+                <span id="dash-study-hours">10 Hours / Week</span>
+              </div>
+              <div class="hero-stat-box">
+                <span class="label">READINESS LEVEL</span>
+                <span id="dash-readiness-level">Intermediate</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-progress-container">
+            <span class="label">Overall Career Readiness</span>
+            <div class="progress-info-row">
+              <span class="progress-val-text" id="dash-readiness-percent">28%</span>
+              <span>Estimated Job Ready: <strong id="dash-job-ready-est">6 Months</strong></span>
+            </div>
+            <div class="progress-bar-outer">
+              <div class="progress-bar-inner" id="dash-readiness-progress-bar" style="width: 28%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Focus & Recommendation Grid -->
+        <div class="dashboard-grid">
+          
+          <!-- Focus Area Card -->
+          <div class="grid-card col-span-2">
+            <div class="card-header">
+              <h3>Current Focus Area</h3>
+              <span class="badge" id="dash-focus-badge">In Progress</span>
+            </div>
+            <div class="focus-card-body">
+              <h4 id="dash-focus-title">Pandas & NumPy Data Operations</h4>
+              <p class="subtitle mt-1" id="dash-focus-desc">Deep-dive into matrix manipulations, Series dataframes, missing data treatment, and vectorized sorting operations.</p>
+              
+              <!-- Checklist of sub items -->
+              <ul class="focus-checklist mt-4" id="dash-focus-checklist">
+                <li class="checked">✓ Python Variables & Loops</li>
+                <li class="checked">✓ NumPy Arrays & SVD</li>
+                <li class="current">◉ Pandas DataFrames & Queries</li>
+                <li class="upcoming">○ Scikit-Learn Regression Baselines</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Recommended Next Action (Accountability Buster) -->
+          <div class="grid-card recommended-action-card">
+            <div class="card-header">
+              <h3>Recommended Next Action</h3>
+              <span class="badge badge-amber" id="dash-action-time">30 Mins</span>
+            </div>
+            <div class="action-card-body">
+              <span class="label text-amber">TODAY'S METRIC BOOST</span>
+              <h4 id="dash-action-title">Complete 5 Pandas DataFrame Filtering Exercises</h4>
+              <p class="subtitle mt-1" id="dash-action-desc">Familiarize yourself with query functions and row-slicing indicators (`.loc` vs `.iloc`).</p>
+              
+              <div class="action-btn-row mt-4">
+                <button class="btn btn-primary btn-full-width" id="btn-dash-action-complete">
+                  Complete Task
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 2: ROADMAP
+           ========================================== -->
+      <div id="view-roadmap" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Personalized Career Roadmap</h2>
+            <p>Your step-by-step milestone path. Check off completed items to increase your Career Readiness score.</p>
+          </div>
+          <div class="roadmap-stage-toggle">
+            <button class="btn-selector active" data-roadmap-phase="all">All Phases</button>
+            <button class="btn-selector" data-roadmap-phase="foundations">Foundations</button>
+            <button class="btn-selector" data-roadmap-phase="intermediate">Intermediate</button>
+            <button class="btn-selector" data-roadmap-phase="advanced">Advanced</button>
+          </div>
+        </div>
+
+        <div class="roadmap-track-container" id="roadmap-milestones-container">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 3: STUDY PLANNER
+           ========================================== -->
+      <div id="view-study-planner" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Structured Study Planner</h2>
+            <p>Large career targets broken down into small, non-overwhelming daily blocks.</p>
+          </div>
+          <div class="roadmap-stage-toggle">
+            <button class="btn-selector active" data-plan-view="daily">Daily Plan</button>
+            <button class="btn-selector" data-plan-view="weekly">Weekly Plan</button>
+            <button class="btn-selector" data-plan-view="monthly">Monthly Plan</button>
+          </div>
+        </div>
+
+        <div class="planner-layout">
+          
+          <!-- Current Plan Card -->
+          <div class="grid-card" id="planner-active-card">
+            <div class="card-header">
+              <h3 id="planner-view-title">Today's Focus Plan</h3>
+              <span class="badge" id="planner-time-required">45 Mins</span>
+            </div>
+            
+            <div class="planner-body">
+              <div class="planner-goal-box">
+                <span class="label">PRIMARY OUTCOME</span>
+                <h4 id="planner-active-goal">Python Decorators & Functional Programming</h4>
+              </div>
+
+              <div class="planner-tasks-section mt-4">
+                <span class="label">ACTION STEPS</span>
+                <ul class="priorities-list" id="planner-active-tasks">
+                  <!-- JS populated -->
+                </ul>
+              </div>
+
+              <div class="action-btn-row mt-4">
+                <button class="btn btn-primary btn-full-width" id="btn-planner-complete-day">Complete Daily Target</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Planner Instructions Card -->
+          <div class="grid-card glass-panel" style="display: flex; flex-direction: column; justify-content: center;">
+            <h3>Strategic Planning Rules</h3>
+            <p class="subtitle mt-2">Priyadharshini, we have designed this planner around micro-habits. Do not try to complete the entire roadmap in one day. Focus on completing today's target. Consistency over intensity.</p>
+            
+            <div class="first-step-box mt-4" style="background-color: rgba(99, 102, 241, 0.04); border-color: rgba(99, 102, 241, 0.15);">
+              <span class="label">Procrastination Fallback</span>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">If you feel overwhelmed by today's outcome, click the **Accountability Coach** tab and run the **Friction Buster** tool to get a 5-minute version.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 4: RESUME REVIEW
+           ========================================== -->
+      <div id="view-resume-review" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>AI Resume Audit & Grade</h2>
+            <p>Paste your resume text to evaluate ATS readability, core skills coverage, and placement preparedness.</p>
+          </div>
+        </div>
+
+        <div class="prep-layout" style="grid-template-columns: 1fr 1fr;">
+          
+          <!-- Text Area input -->
+          <div class="grid-card">
+            <h3>Paste Resume Content</h3>
+            <p class="subtitle mb-4">Copy and paste the plain text of your resume here.</p>
+            <form id="resume-form" class="modal-form">
+              <div class="form-group">
+                <textarea id="input-resume-text" rows="15" placeholder="Priyadharshini
+ML Intern Target
+Python, Pandas, SQL...
+Build models on housing data..." required style="resize: vertical; font-family: var(--font-body); font-size: 0.85rem; line-height: 1.5;"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full-width">Run AI Audit</button>
+            </form>
+          </div>
+
+          <!-- Audit Results Area -->
+          <div class="grid-card" id="resume-result-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 400px; text-align: center;">
+            <div class="empty-priority" id="resume-empty-view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; margin-bottom: 1rem; color: var(--text-muted);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <p>Your resume report is empty. Paste your details and run the audit to generate scores.</p>
+            </div>
+            
+            <div id="resume-report-view" style="display: none; text-align: left; width: 100%;">
+              <div class="resume-score-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; margin-bottom: 1rem;">
+                <div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff;">ATS Audit Report</h3>
+                  <span class="badge" id="resume-readiness-badge">Intern Ready</span>
+                </div>
+                <div class="circle-score-box" style="width: 70px; height: 70px; border-radius: 50%; border: 4px solid var(--accent-primary); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; color: #fff; box-shadow: 0 0 10px var(--accent-primary-glow);">
+                  <span id="resume-score-num">82</span>
+                </div>
+              </div>
+
+              <div class="resume-grid-blocks" style="display: flex; flex-direction: column; gap: 1rem; max-height: 400px; overflow-y: auto; padding-right: 0.5rem;">
+                
+                <div class="first-step-box" style="background-color: rgba(239, 68, 68, 0.03); border-color: rgba(239, 68, 68, 0.15);">
+                  <span class="label" style="color: var(--color-danger);">Missing Core Skills</span>
+                  <p id="resume-missing-skills" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+                <div class="first-step-box" style="background-color: rgba(245, 158, 11, 0.03); border-color: rgba(245, 158, 11, 0.15);">
+                  <span class="label" style="color: var(--color-warning);">Weak Elements</span>
+                  <p id="resume-weak-areas" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+                <div class="first-step-box" style="background-color: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.15);">
+                  <span class="label" style="color: var(--color-success);">Suggested Projects</span>
+                  <p id="resume-suggested-projects" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+                <div class="first-step-box" style="background-color: rgba(99, 102, 241, 0.03); border-color: rgba(99, 102, 241, 0.15);">
+                  <span class="label" style="color: var(--accent-primary);">Recommended Certifications</span>
+                  <p id="resume-suggested-certs" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 5: INTERVIEW PREP
+           ========================================== -->
+      <div id="view-interview-prep" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Interview Preparation Trainer</h2>
+            <p>Test your conceptual depth. Answer technical and behavioral questions and get scored evaluations.</p>
+          </div>
+        </div>
+
+        <div class="prep-layout" style="grid-template-columns: 1.2fr 1fr;">
+          
+          <!-- Question Panel -->
+          <div class="grid-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 450px;">
+            <div class="interview-setup-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; margin-bottom: 1rem;">
+              <h3>Live Mock Question</h3>
+              <select id="interview-role-select" class="btn btn-secondary btn-sm" style="font-weight: 500; font-family: var(--font-body); padding: 0.25rem 0.75rem;">
+                <option value="Machine Learning Engineer">MLE</option>
+                <option value="AI Engineer">AI Engineer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Software Engineer">Software Engineer</option>
+              </select>
+            </div>
+
+            <!-- Active Question Display -->
+            <div id="interview-active-question-box">
+              <span class="badge badge-amber" id="interview-q-type">Technical</span>
+              <p id="interview-question-text" style="font-size: 1.15rem; color: #fff; font-family: var(--font-heading); font-weight: 500; margin-top: 0.5rem; line-height: 1.45;">Select your career track and click "Generate New Question" to begin.</p>
+            </div>
+
+            <!-- Answer Submission Form -->
+            <form id="interview-answer-form" class="modal-form mt-4" style="display: none;">
+              <div class="form-group">
+                <label for="input-interview-answer">Your Response</label>
+                <textarea id="input-interview-answer" rows="5" placeholder="Type your answer here. Provide details and real-world examples." required style="resize: vertical; font-size: 0.85rem; line-height: 1.5;"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full-width">Submit Answer for Assessment</button>
+            </form>
+
+            <div class="action-btn-row mt-4" id="interview-trigger-row">
+              <button class="btn btn-primary btn-full-width" id="btn-generate-question">Generate New Question</button>
+            </div>
+          </div>
+
+          <!-- Coach Feedback Panel -->
+          <div class="grid-card" id="interview-feedback-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 450px; text-align: center;">
+            <div class="empty-priority" id="interview-feedback-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; margin-bottom: 1rem; color: var(--text-muted);"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <p>Answer the question on the left to receive AI coaching, improvements, and the ideal response.</p>
+            </div>
+            
+            <div id="interview-feedback-report" style="display: none; text-align: left; width: 100%;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; margin-bottom: 1rem;">
+                <div>
+                  <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff;">Coach Assessment</h4>
+                  <span class="badge badge-green" id="interview-score-badge">Good Try</span>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: #fff;">
+                  Grade: <span id="interview-score-val">8/10</span>
+                </div>
+              </div>
+
+              <div class="resume-grid-blocks" style="display: flex; flex-direction: column; gap: 1rem; max-height: 330px; overflow-y: auto; padding-right: 0.5rem;">
+                <div class="first-step-box" style="background-color: rgba(245, 158, 11, 0.03); border-color: rgba(245, 158, 11, 0.15);">
+                  <span class="label" style="color: var(--color-warning);">Evaluation & Gaps</span>
+                  <p id="interview-evaluation" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+                <div class="first-step-box" style="background-color: rgba(99, 102, 241, 0.03); border-color: rgba(99, 102, 241, 0.15);">
+                  <span class="label" style="color: var(--accent-primary);">Suggested Improvements</span>
+                  <p id="interview-improvements" style="font-size: 0.85rem; color: #fff;"></p>
+                </div>
+
+                <div class="first-step-box" style="background-color: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.15);">
+                  <span class="label" style="color: var(--color-success);">Ideal Response Template</span>
+                  <p id="interview-ideal-answer" style="font-size: 0.85rem; color: #fff; font-family: var(--font-mono); line-height: 1.45;"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 6: PROGRESS TRACKER
+           ========================================== -->
+      <div id="view-progress-tracker" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Placement Progress Tracker</h2>
+            <p>Review your visual portfolio and earned credentials. Keep coding to unlock achievements.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <!-- Visual Metrics Card -->
+          <div class="grid-card col-span-2">
+            <h3>Skill Accomplishments</h3>
+            <div class="metrics-row mt-4">
+              <div class="metric-card">
+                <span class="metric-val" id="tracker-courses-count">2</span>
+                <span class="metric-lbl">Roadmaps Started</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-val" id="tracker-skills-count">3</span>
+                <span class="metric-lbl">Skills Mastered</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-val" id="tracker-projects-count">1</span>
+                <span class="metric-lbl">Projects Logged</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-val" id="tracker-interviews-count">0</span>
+                <span class="metric-lbl">Audits Run</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Focus Area Target Readiness -->
+          <div class="grid-card">
+            <h3>Job Readiness Index</h3>
+            <div class="timer-display-container mt-2" style="width: 140px; height: 140px; margin: 0 auto;">
+              <svg class="progress-ring" width="140" height="140">
+                <circle class="progress-ring-circle-bg" stroke="rgba(255, 255, 255, 0.05)" stroke-width="6" fill="transparent" r="58" cx="70" cy="70" />
+                <circle class="progress-ring-circle" id="tracker-ring" stroke="var(--accent-primary)" stroke-width="6" fill="transparent" r="58" cx="70" cy="70" />
+              </svg>
+              <div class="timer-text-container">
+                <span class="timer-time" id="tracker-ring-val" style="font-size: 1.5rem;">28%</span>
+                <span class="timer-label">Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Earned Badges Card -->
+          <div class="grid-card col-span-3">
+            <h3>Earned Achievement Badges</h3>
+            <p class="subtitle mb-4">Badges automatically unlock based on your tracker statistics.</p>
+            
+            <div class="badges-row" id="tracker-badges-container">
+              <div class="badge-item-card locked" id="badge-python">
+                <div class="badge-icon">🐍</div>
+                <div class="badge-info">
+                  <h4>Python Master</h4>
+                  <span>Complete Python Roadmap Milestones</span>
+                </div>
+              </div>
+              <div class="badge-item-card locked" id="badge-project">
+                <div class="badge-icon">💻</div>
+                <div class="badge-info">
+                  <h4>First Project Completed</h4>
+                  <span>Complete 1 portfolio planner project</span>
+                </div>
+              </div>
+              <div class="badge-item-card locked" id="badge-resume">
+                <div class="badge-icon">📄</div>
+                <div class="badge-info">
+                  <h4>Resume Ready</h4>
+                  <span>Grade your resume >= 80</span>
+                </div>
+              </div>
+              <div class="badge-item-card locked" id="badge-interview">
+                <div class="badge-icon">💬</div>
+                <div class="badge-info">
+                  <h4>Interview Ready</h4>
+                  <span>Grade an interview answer >= 8/10</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 7: ACCOUNTABILITY COACH
+           ========================================== -->
+      <div id="view-accountability-coach" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Empathetic Accountability Coach</h2>
+            <p>Your consistency dashboard. We value micro-habits and progressive recovery.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <!-- Streaks and metrics -->
+          <div class="grid-card">
+            <h3>Consistency Dashboard</h3>
+            <div class="focus-card-body" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; margin-top: 1rem;">
+              <div class="streak-fire-box" style="font-size: 3rem; animation: pulse 2s infinite;">🔥</div>
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: 1.5rem;" id="coach-streak-num">1 Day</h4>
+                <p class="subtitle">Current Consecutive Study Streak</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coach Encouraging Prompt -->
+          <div class="grid-card col-span-2" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card-header">
+              <h3>Mentor Guidance Output</h3>
+              <span class="badge badge-green">Online</span>
+            </div>
+            
+            <div class="coach-prompt-speech" style="background-color: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 12px; position: relative;">
+              <p id="coach-encouragement-text" style="font-style: italic; font-size: 1rem; line-height: 1.5; color: #fff;">"You completed your daily target. Fantastic momentum. Take a short break, reflect on what you learned, and we'll rebuild this streak tomorrow."</p>
+            </div>
+
+            <div class="coach-encouragement-controls mt-4" style="display: flex; gap: 1rem;">
+              <button class="btn btn-secondary" id="btn-coach-simulate-miss">Simulate Missed Day</button>
+              <button class="btn btn-primary" id="btn-coach-simulate-work">Log Extra Session</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB VIEW 8: RESOURCES
+           ========================================== -->
+      <div id="view-resources" class="view-tab">
+        <div class="page-section-header">
+          <div>
+            <h2>Personalized Resource Hub</h2>
+            <p>Recommended courses, books, documentation, and tools based on your target career track.</p>
+          </div>
+        </div>
+
+        <div class="roadmap-tree-grid" id="resources-grid-container">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
